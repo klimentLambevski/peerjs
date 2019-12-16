@@ -46,7 +46,7 @@ export class Negotiator {
   private _startPeerConnection(): RTCPeerConnection {
     logger.log("Creating RTCPeerConnection.");
 
-    const peerConnection = new RTCPeerConnection(this.connection.provider.options.config);
+    const peerConnection = new RTCPeerConnection(this.connection.config || this.connection.provider.options.config);
 
     this._setupListeners(peerConnection);
 
@@ -212,7 +212,8 @@ export class Negotiator {
           type: this.connection.type,
           connectionId: this.connection.connectionId,
           metadata: this.connection.metadata,
-          browser: util.browser
+          browser: util.browser,
+          config: this.connection.provider.options.config
         };
 
         if (this.connection.type === ConnectionType.Data) {
@@ -222,7 +223,7 @@ export class Negotiator {
             ...payload,
             label: dataConnection.label,
             reliable: dataConnection.reliable,
-            serialization: dataConnection.serialization
+            serialization: dataConnection.serialization,
           };
         }
 

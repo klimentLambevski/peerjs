@@ -255,7 +255,8 @@ export class Peer extends EventEmitter {
           connection = new MediaConnection(peerId, this, {
             connectionId: connectionId,
             _payload: payload,
-            metadata: payload.metadata
+            metadata: payload.metadata,
+            config: payload.config
           });
           this._addConnection(peerId, connection);
           this.emit(PeerEventType.Call, connection);
@@ -266,7 +267,8 @@ export class Peer extends EventEmitter {
             metadata: payload.metadata,
             label: payload.label,
             serialization: payload.serialization,
-            reliable: payload.reliable
+            reliable: payload.reliable,
+            config: payload.config
           });
           this._addConnection(peerId, connection);
           this.emit(PeerEventType.Connection, connection);

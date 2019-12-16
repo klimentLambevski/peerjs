@@ -7,6 +7,7 @@ export abstract class BaseConnection extends EventEmitter {
   protected _open = false;
 
   readonly metadata: any;
+  readonly config: any;
   connectionId: string;
 
   peerConnection: RTCPeerConnection;
@@ -25,6 +26,7 @@ export abstract class BaseConnection extends EventEmitter {
     super();
 
     this.metadata = options.metadata;
+    this.config = options.config;
   }
 
   abstract close(): void;
